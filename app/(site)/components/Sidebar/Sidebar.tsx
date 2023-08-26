@@ -1,20 +1,20 @@
+
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import DesktopSidebar from "../DesktopSidebar/DesktopSidebar";
 import MobileSidebar from "../MobileSidebar/MobileSidebar";
-import getSession from "@/app/actions/getSession";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import React from "react";
+import { useSession } from "next-auth/react";
 
-export default async function Sidebar({ children }: { children: React.ReactNode }) {
 
-   const session = getServerSession(authOptions)
+async function Sidebar({ children }: { children: React.ReactNode }) {
 
-   console.log(session)
 
+    const currentUser = await getCurrentUser()
+    
     return (
         <div className="h-full">
             <MobileSidebar />
-            <DesktopSidebar />
+            <DesktopSidebar  currentUser={currentUser} />
             <main className="lg:pl-20 h-full">
                 {children}
             </main>
@@ -22,3 +22,5 @@ export default async function Sidebar({ children }: { children: React.ReactNode 
     )
 }
 
+
+export default Sidebar;
