@@ -25,7 +25,8 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({currentUser}) => {
                 <ul className="flex flex-col items-center w-20 space-y-6">
                     {
                         routes.map((items) =>
-                            <DesktopSidebarItems
+                            <DesktopSidebarItems 
+                           
                                 key={items.label}
                                 label={items.label}
                                 href={items.href}
@@ -40,7 +41,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({currentUser}) => {
 
             <div className="flex justify-center items-center bg-red w-full">
                 <div className="cursor-pointer">
-                    <UserAvatar currentUser={currentUser}/>
+                    <UserAvatar currentUser={currentUser}  marker={true}/>
                     </div>
                
             </div>

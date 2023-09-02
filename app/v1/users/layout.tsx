@@ -10,8 +10,6 @@ export default async function UserLayout({ children }: {
 
     const userList = await getAllUsers()
 
-    console.log(userList)
-    
     return (
         <Sidebar>
             <div className="h-full">

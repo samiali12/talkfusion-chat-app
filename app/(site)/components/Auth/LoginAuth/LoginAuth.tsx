@@ -28,7 +28,7 @@ const LoginAuth = () => {
 
     useEffect( () => {
         if(session.status == "authenticated"){
-            router.push("/v1/user")
+            router.push("/v1/users")
         }
     }, [session?.status, router])
 

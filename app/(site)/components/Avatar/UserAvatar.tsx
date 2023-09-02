@@ -5,32 +5,13 @@ import React, { useEffect, useState } from 'react';
 
 
 interface UserAvatarProps {
-    currentUser: User
+    currentUser: any,
+    marker: boolean
 }
 
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser, marker }) => {
 
-    const [avatarText, setAvatarText] = useState<String | null>()
-
-    useEffect(() => {
-
-        if (currentUser.name != null) {
-            let name: string = currentUser.name
-            let spaceIndex: number = name.indexOf(" ")
-
-            let firstChar: string = name.charAt(0)
-            if (spaceIndex !== -1 && spaceIndex < name.length - 1) {
-                const characterAfterSpace: string = name[spaceIndex + 1];
-                setAvatarText(firstChar + characterAfterSpace)
-            } else {
-                setAvatarText(firstChar)
-            }
-
-        }
-
-
-    }, [currentUser, setAvatarText])
 
     return (
 
@@ -40,18 +21,31 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
                 currentUser.image ? (
                     <div>
                         <img
+                           
                             src={currentUser?.image}
-                            className="w-10 h-10 rounded-full shadow-lg"
+                            className={`w-10 h-10  rounded-full object-cover`}
                             alt="Avatar" />
                     </div>
                 ) : (
-                    <div className="w-10 h-10 bg-[#007B83] p-1 text-white text-sm rounded-full shadow-lg">
-                        <span>{avatarText}</span>
+                    <div>
+                        <img
+                            
+                            src="https://norrismgmt.com/wp-content/uploads/2020/05/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                            className={`w-10 h-10 rounded-full object-cover`}
+                            alt="Avatar" />
                     </div>
                 )
             }
 
-            <span className="bg-green-500 h-3 w-3 absolute top-0 right-0 rounded-full" />
+            {
+                marker ? (
+                    <span className="bg-green-500 h-3 w-3 absolute top-0 right-0 rounded-full" />
+                ) : (
+
+                    <span></span>
+                )
+            }
+
 
         </div>
     )

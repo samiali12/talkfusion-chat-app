@@ -7,6 +7,7 @@ const getAllUsers = async () => {
         const session = await getSession()
 
         if (!session?.user?.email) {
+           
             return []
         }
 
@@ -26,6 +27,7 @@ const getAllUsers = async () => {
             return []
         }
 
+        //console.log("List => " , users)
         return users
     }
     catch (error) {

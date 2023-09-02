@@ -18,19 +18,24 @@ const DesktopSidebarItems: React.FC<DesktopSidebarItemsProps> = ({
         }
     }
 
+    if(active){
+        active = true
+    }
+
     return (
-        <li onClick={handleClicks}>
-            <Link
+    
+
+       
+            <Link onClick={handleClicks}
                 href={href}
-                className="flex items-center 
-                flex-col text-sm text-gray-600 
-                hover:bg-gray-100 p-3 rounded transition-all"
+                className={`flex items-center 
+                flex-col text-sm text-gray-600  ${active ? 'bg-gray-200': ''}
+                hover:bg-gray-100 p-3 rounded transition-all`}
                 onClick={onClick}>
                 <Icon className="w-6 h-6 shrink-0" />
                 <span className="">{label}</span>
             </Link>
-
-        </li>
+            
     )
 }
 

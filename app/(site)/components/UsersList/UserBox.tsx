@@ -1,20 +1,46 @@
+"use client"
 
-const UserBox = () => {
+import { User } from "@prisma/client";
+import React, { useCallback, useEffect, useState } from 'react';
+import UserAvatar from "../Avatar/UserAvatar";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+interface UserBoxProps {
+    user: User
+}
+
+const UserBox: React.FC<UserBoxProps> = ({ user }) => {
+
+    const router = useRouter()
+
+    const handler = useCallback(() => {
+
+        console.log(user.id)
+        axios.post("/api/conversation", {userId: user.id}).then(() => {
+            router.push(`/v1/conversation/${user.id}`)
+        })
+    
+    }, [user, router])
+
+
     return (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-3" onClick={handler}>
             <div className="flex-shrink-0">
-                <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image" />
+
+                <UserAvatar currentUser={user} marker={true} />
+
             </div>
             <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
-                    Neil Sims
+                    {user.name}
                 </p>
                 <p className="text-sm text-gray-500 truncate">
-                    email@windster.com
+                    {user.email}
                 </p>
             </div>
             <div className="inline-flex text-base font-semibold text-gray-900">
-                <img className="w-4 h-4 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" />
+                
             </div>
         </div>
     )
